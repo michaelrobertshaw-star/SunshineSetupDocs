@@ -173,7 +173,6 @@
     <li><a href="#workflow">Operator Workflow</a></li>
     <li><a href="#config">Configuration Reference</a></li>
     <li><a href="#shortcuts">Keyboard Shortcuts</a></li>
-    <li><a href="#checklist">Setup Checklist</a></li>
     <li><a href="#notes">Key Notes</a></li>
     <li><a href="#glossary">Glossary</a></li>
   </ol>
@@ -375,50 +374,6 @@
 </table>
 <div class="note"><strong>Mandatory sequence for every RTD trip:</strong> <kbd>ALT+Z</kbd> (verify fare) → Pay with Card → <kbd>F1</kbd> (save). Skipping the save step breaks the account switchback automation.</div>
 
-<!-- ─── SETUP CHECKLIST ───────────────────────────────────────── -->
-<h2 id="checklist">Setup Checklist</h2>
-
-<div class="check-group">Account</div>
-<ul class="checklist">
-  <li>RTD account created in <code>Manage &gt; Accounts</code> with tag <code>RTD</code></li>
-  <li>STRIPEPAYNOW companion account exists and connected to Stripe processor</li>
-  <li>Allow Split Payment Methods = YES on RTD account</li>
-  <li>Require Payment Processing = YES on RTD account</li>
-  <li>Stripe API keys configured at tenant level</li>
-  <li><strong>Account-switchback automation deployed and tested</strong> (webhook or Booking_Created hook: STRIPEPAYNOW → RTD)</li>
-  <li>Automation idempotency verified (re-firing is a no-op)</li>
-</ul>
-
-<div class="check-group">Site</div>
-<ul class="checklist">
-  <li>RTD site created in <code>Admin &gt; Config &gt; Sites</code></li>
-  <li>Site ID = 210 (or tenant equivalent)</li>
-  <li>Enable Google Routing = YES</li>
-  <li>Prebooking Disabled Periods grid set against RTD calendar</li>
-</ul>
-
-<div class="check-group">Zone</div>
-<ul class="checklist">
-  <li>RTD zone created with geographic boundaries defined</li>
-  <li>On Demand Zone setting confirmed per RTD booking model</li>
-  <li>Zone tags and dispatch priority applied</li>
-</ul>
-
-<div class="check-group">Tariff</div>
-<ul class="checklist">
-  <li>Tariff <code>RTD: OWED NOW</code> created</li>
-  <li>Tariff Mode = FIXED · Recalculate Price = ACTUAL ROUTE</li>
-  <li>Three mileage bands configured (0–1.13 · 1.131–6.13 · 6.131–9999)</li>
-  <li>Account Tag <code>RTD</code> applied · Vehicle types and Sites restricted</li>
-  <li>Test Fare Calculator validated before saving</li>
-</ul>
-
-<div class="check-group">Operational Readiness</div>
-<ul class="checklist">
-  <li>Operators trained on ALT+Z → Pay with Card → F1 save sequence</li>
-  <li>Operators understand Pay Now vs Pay Later for overage trips</li>
-  <li>End-to-end test booking completed and confirmed under RTD account on completion</li>
-</ul>
 
 <!-- ─── KEY NOTES ─────────────────────────────────────────────── -->
 <h2 id="notes">Key Notes</h2>
@@ -429,7 +384,6 @@
 
 <div class="note"><strong>Cards are looked up by phone number.</strong> The Pay with Card modal uses the PHONE field to retrieve saved cards. Always confirm the phone is correct before opening the modal.</div>
 
-<div class="note"><strong>On Demand Zone trade-off.</strong> Setting On Demand Zone = YES enables real-time driver allocation but blocks all prebookings in that zone. If RTD requires advance reservations, leave On Demand off (or split into two zones — one On Demand, one prebooking).</div>
 
 <!-- ─── GLOSSARY ───────────────────────────────────────────────── -->
 <h2 id="glossary">Glossary</h2>
